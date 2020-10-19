@@ -11,36 +11,70 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         int harga, terima;
-        //harga harus lebih kecil dari 100ribu
+        int bonus = 0;
+        double total = 0;
+        double komisi = 0;
+
+        //harga lebih kecil dari 500ribu
         System.out.print("Harga Barang: ");
         harga = scan.nextInt();
 
-        while (harga > 100000) {
-            System.out.println("Harga maksimal 100ribu");
+        while (harga > 500000) {
+            System.out.println("Harga maksimal 500ribu");
             System.out.print("Harga Barang: ");
             harga = scan.nextInt();
         }
         System.out.print("Jumlah uang dibayar: ");
         terima = scan.nextInt();
 
-        kembalian(harga, terima);
+        kembalian(harga, terima, komisi,bonus,total );
     }
-    static void kembalian(int harga, int terima) {
+
+    private static void kembalian(int harga, int terima, double komisi,int bonus,double total) {
 
         int kembali = terima - harga;
         System.out.println("Kembalian: " + kembali);
 
         int nilai;
+        nilai = kembali / 100000;
+        kembali -= nilai * 100000;
+        System.out.println("Jumlah uang Rp.100000: " + nilai);
+        nilai = kembali / 50000;
+        kembali -= nilai * 50000;
+        System.out.println("Jumlah uang Rp.50000: " + nilai);
         nilai = kembali / 20000;
         kembali -= nilai * 20000;
         System.out.println("Jumlah uang Rp.20000: " + nilai);
         nilai = kembali / 10000;
-        kembali -= nilai * 10000;
         System.out.println("Jumlah uang Rp.10000: " + nilai);
-        nilai = kembali / 5000;
-        kembali -= nilai * 5000;
-        System.out.println("Jumlah uang Rp.5000: " + nilai);
-        nilai = kembali / 1000;
-        System.out.println("Jumlah uang Rp.1000: " + nilai);
+
+        if (harga<=100000){
+            bonus=10000;
+            komisi=0.1*harga;
+            System.out.println("bonus : Rp"+bonus);
+            System.out.println("komisi yang didapat 10% :" + komisi);
+        }else if (harga<=200000){
+            bonus=50000;
+            komisi=0.2*harga;
+            System.out.println("bonus : Rp"+bonus);
+            System.out.println("komisi yang didapat 20%: " +komisi);
+        }else if (harga<=300000){
+            bonus=75000;
+            komisi=0.3*harga;
+            System.out.println("bonus : Rp"+bonus);
+            System.out.println("komisi yang didapat 30%: " +komisi);
+        }else if (harga<=400000){
+            bonus=100000;
+            komisi=0.4*harga;
+            System.out.println("bonus : Rp"+bonus);
+            System.out.println("komisi yang didapat 40%: " +komisi);
+        }else if (harga<=500000){
+            bonus=150000;
+            komisi=0.5*harga;
+            System.out.println("bonus : Rp"+bonus);
+            System.out.println("komisi yang didapat 50%: "+komisi);
+        }
+        total=  komisi + bonus;
+        System.out.println("total bonus dan komisi :" +total);
     }
 }
